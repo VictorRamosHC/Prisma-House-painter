@@ -1,4 +1,4 @@
-2<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
@@ -20,6 +20,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
+/* ============================================================
+   PRISMA HOUSE PAINTER — Landing Page
+   ============================================================ */
 /* ═══════════ TOKENS OFICIAIS ═══════════ */
 :root {
   --teal:         #298da6;
@@ -160,11 +163,6 @@ img{display:block;max-width:100%;}
 @media(max-width:768px){
   .banner-bg{
       background-size: 120% auto;
-    background-position: center 40%;
-  }
-@media(max-width:768px){
-  .banner-bg{
-    background-size: 120% auto;
     background-position: center 40%;
   }
 }
@@ -1593,21 +1591,6 @@ textarea{resize:vertical;min-height:95px;}
         .finally(function(){ estado.loading = false; });
     }
 
-    function loadMock(){
-      var mock = [
-        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/galeria-antes-depois-1-6Xq9gEBwdA9qncBftvCgSw.webp', title:'Sala de Estar — Pintura Interna', description:'Renovação completa da sala de estar com cores neutras e acabamento impecável. Proteção de mobiliário e limpeza final inclusas.', location:'Sumaré - SP', createdAt:'2026-09-10', categoria:'Pintura Interna' },
-        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/galeria-antes-depois-2-f8VcQz4Ha4rKWX4NsZJBPV.webp', title:'Quarto Master — Textura Especial', description:'Aplicação de textura projetada com finish sofisticado. Resultado que transforma totalmente o ambiente.', location:'Campinas - SP', createdAt:'2026-08-28', categoria:'Efeitos Decorativos' },
-        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/01-cimento-queimado-5RY5M7EnNBf8nJRMdCenyk.webp', title:'Sala de Estar — Cimento Queimado', description:'Acabamento em cimento queimado com traço artesanal. Toque moderno e durável para ambientes residenciais.', location:'Valinhos - SP', createdAt:'2026-08-15', categoria:'Efeitos Decorativos' },
-        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/02-velvet-nuage-HWK8q6MP4Gj79VtXvZoUzd.webp', title:'Divisão — Velvet Nuage', description:'Parede em Velvet Nuage com toque de nuvem. Elegância e suavidade em um único acabamento.', location:'Sumaré - SP', createdAt:'2026-08-02', categoria:'Efeitos Decorativos' },
-        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/03-pedras-naturais-LTFpPCe9GK8nfVNcLnc4gY.webp', title:'Banheiro — Pedras Naturais', description:'Simulação de pedras naturais no banheiro. Visual premium e fácil manutenção para o dia a dia.', location:'Vinhedo - SP', createdAt:'2026-07-20', categoria:'Efeitos Decorativos' },
-        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/08-pintura-interna-QEtuvGESTBxW6gLcjfjf3u.webp', title:'Galeria — Pintura Interna Premium', description:'Passadeira fina e uniforme em galeria residencial. Cores selecionadas para realçar a coleção de arte.', location:'Indaiatuba - SP', createdAt:'2026-07-05', categoria:'Pintura Interna' }
-      ];
-      estado.items = mock;
-      estado.total = mock.length;
-      estado.hasMore = false;
-      renderPage(mock, false);
-    }
-
     function fetchFotos(){
       if('fetch' in window){
         fetch(apiUrl + '?page=1&limit=' + PAGE_SIZE)
@@ -1625,10 +1608,8 @@ textarea{resize:vertical;min-height:95px;}
             }
           })
           .catch(function(){
-            loadMock();
+            showEmpty();
           });
-      } else {
-        loadMock();
       }
     }
 
