@@ -429,64 +429,184 @@ img{display:block;max-width:100%;}
 .srv-card h3{font-family:'Franklin Gothic Demi Cond',sans-serif;font-size:1.18rem;font-weight:600;color:#1a6e82;margin-bottom:.5rem;line-height:1.2;}
 .srv-card p{font-size:.86rem;color:var(--txt-muted);line-height:1.72;font-weight:300;}
 
-/* ═══════════ GALERIA ═══════════ */
-.gal-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.4rem;margin-bottom:2.5rem;}
-.gal-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:.9rem;
+/* ═══════════ FEED DE SERVIÇOS ═══════════ */
+.feed-post{
+  background:var(--white);
+  border:1px solid var(--teal-border);
+  border-radius:var(--r3);
+  overflow:hidden;
+  transition:box-shadow .4s var(--ease),transform .4s var(--ease);
+  cursor:pointer;
 }
-.gal-item{
-  border-radius:var(--r2);overflow:hidden;
-  position:relative;cursor:pointer;
-  transition:box-shadow .4s var(--ease);
+.feed-post:hover{box-shadow:var(--sh-md);transform:translateY(-3px);}
+.feed-post-img{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/3;
+  background:var(--pale);
+  overflow:hidden;
 }
-.gal-item:hover{box-shadow:var(--sh-lg);}
-.gal-item.feat{grid-column:span 2;}
-.gal-img{
-  height:230px;background:var(--pale);
-  position:relative;overflow:hidden;
-}
-.gal-item.feat .gal-img{height:290px;}
-.gal-img img{
-  width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease);
-  opacity:1;transition:opacity .3s ease-in-out,transform .55s var(--ease);
-}
-.gal-img img[loading="lazy"]{
-  opacity:0;
-}
-.gal-img img.loaded{
-  opacity:1;
-}
-.gal-img::after{
-  content:'Imagem Ilustrativa';
-  position:absolute;bottom:8px;right:8px;
-  font-size:.65rem;color:rgba(255,255,255,.6);
-  background:rgba(0,0,0,.3);padding:.35rem .65rem;
-  border-radius:3px;font-weight:500;
-  pointer-events:none;z-index:2;
-}
-.gal-item:hover .gal-img img{transform:scale(1.06);}
-/* =====================================================
-   5 ESPAÇOS DE IMAGEM — GALERIA
-   Adicione <img src="foto.jpg" alt="..."/> dentro
-   de cada .gal-img quando tiver as fotos.
-===================================================== */
-.gal-ph{
-  width:100%;height:100%;
-  background:linear-gradient(135deg,var(--pale),var(--off));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
-}
-.gal-ph em{font-size:1.9rem;opacity:.22;font-style:normal;}
-.gal-ph span{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-muted);text-align:center;padding:0 .9rem;}
-.gal-ovl{
+.feed-post-img img{
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(13,40,48,.72) 0%,transparent 55%);
-  opacity:0;transition:opacity .4s;
-  display:flex;align-items:flex-end;padding:.9rem 1.1rem;
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .55s var(--ease),opacity .3s ease-in-out;
 }
-.gal-item:hover .gal-ovl{opacity:1;}
-.gal-lbl{font-size:.78rem;font-weight:500;color:#fff;letter-spacing:.05em;}
+.feed-post-img img[loading="lazy"]{opacity:0;}
+.feed-post-img img.loaded{opacity:1;}
+.feed-post:hover .feed-post-img img{transform:scale(1.04);}
+.feed-post-category{
+  position:absolute;top:.7rem;left:.7rem;
+  background:rgba(10,31,38,.68);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  color:#fff;font-size:.68rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.35rem .75rem;border-radius:var(--r1);
+  z-index:2;
+}
+.feed-post-body{padding:1rem 1.15rem 1.2rem;}
+.feed-post-title{
+  font-family:'Franklin Gothic Demi Cond',sans-serif;
+  font-size:1.05rem;font-weight:600;
+  color:var(--teal-dark);line-height:1.25;
+  margin-bottom:.4rem;
+}
+.feed-post-desc{
+  font-size:.84rem;color:var(--txt-muted);
+  line-height:1.65;font-weight:300;
+  margin-bottom:.7rem;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.feed-post-meta{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.74rem;color:var(--txt-muted);
+  flex-wrap:wrap;
+}
+.feed-post-loc{
+  display:inline-flex;align-items:center;gap:.35rem;
+  color:var(--txt-mid);
+}
+.feed-post-date{color:var(--txt-muted);}
+
+/* Estados do feed */
+.feed-loading{
+  display:flex;flex-direction:column;gap:1.2rem;
+  padding:1rem 0;
+}
+.feed-skel{
+  background:var(--pale);
+  border-radius:var(--r3);overflow:hidden;
+}
+.feed-skel-img{
+  aspect-ratio:4/3;background:linear-gradient(110deg,var(--pale) 30%,var(--off) 50%,var(--pale) 70%);
+  background-size:200% 100%;animation:shimmer 1.6s infinite linear;
+}
+.feed-skel-body{padding:1rem 1.15rem 1.2rem;}
+.feed-skel-line{height:14px;background:var(--pale);border-radius:3px;margin-bottom:.65rem;}
+.feed-skel-line:w{ width:65%;height:12px;}
+.feed-skel-line:n{ width:45%;height:12px;margin-top:.5rem;}
+.feed-skel-line:m{ width:80%;height:11px;margin-top:.35rem;}
+@keyframes shimmer{
+  from{background-position:200% 0;}
+  to{background-position:-200% 0;}
+}
+.feed-empty,.feed-error{
+  text-align:center;padding:3.5rem 1.5rem;
+  max-width:420px;margin:0 auto;
+}
+.feed-empty-em{
+  font-size:3rem;font-style:normal;display:block;
+  margin-bottom:1rem;opacity:.35;
+}
+.feed-empty h3{
+  font-family:'Franklin Gothic Demi Cond',sans-serif;
+  font-size:1.2rem;font-weight:600;color:var(--teal-dark);
+  margin-bottom:.5rem;
+}
+.feed-empty p,.feed-error p{
+  font-size:.88rem;color:var(--txt-muted);line-height:1.6;
+}
+.feed-error-icon{
+  font-size:2.4rem;display:block;margin-bottom:1rem;
+}
+
+/* Load more */
+.feed-load-more{
+  display:block;margin:2.5rem auto 0;
+  padding:.85rem 2.2rem;
+  background:var(--white);border:1.5px solid var(--teal);
+  color:var(--teal-dark);font-size:.84rem;font-weight:600;
+  border-radius:var(--r1);cursor:pointer;
+  transition:background .3s,color .3s,box-shadow .3s,transform .2s var(--ease);
+}
+.feed-load-more:hover{
+  background:var(--teal);color:#fff;box-shadow:var(--sh-t);
+  transform:translateY(-2px);
+}
+.feed-load-more:disabled{
+  opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;
+}
+
+/* Modal / Lightbox */
+.feed-modal{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(10,31,38,.88);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  padding:1rem;opacity:0;
+  transition:opacity .3s var(--ease);
+}
+.feed-modal.open{display:flex;opacity:1;}
+.feed-modal-img{
+  position:relative;
+  max-width:92vw;max-height:85vh;
+  border-radius:var(--r2);
+  overflow:hidden;
+  box-shadow:var(--sh-lg);
+  transform:scale(.94);
+  transition:transform .35s var(--ease);
+}
+.feed-modal.open .feed-modal-img{transform:scale(1);}
+.feed-modal-img img{
+  display:block;width:100%;height:auto;
+  max-height:80vh;object-fit:contain;
+}
+.feed-modal-close{
+  position:absolute;top:-3.2rem;right:-1rem;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--white);color:var(--txt);
+  font-size:1.3rem;font-weight:300;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:none;
+  box-shadow:var(--sh-sm);
+  transition:background .3s,transform .25s var(--ease);
+  z-index:2;
+}
+.feed-modal-close:hover{background:var(--teal);color:#fff;transform:scale(1.06);}
+.feed-modal-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:.8rem 1rem;
+  background:linear-gradient(to top,rgba(10,31,38,.75) 0%,transparent 100%);
+  color:#fff;font-size:.8rem;text-align:center;
+}
+
+/* Responsivo feed */
+@media(max-width:768px){
+  .feed-post-body{padding:.85rem 1rem 1rem;}
+  .feed-post-title{font-size:.95rem;}
+  .feed-post-desc{font-size:.8rem;}
+  .feed-modal-close{top:-2.8rem;right:-.6rem;width:40px;height:40px;font-size:1.1rem;}
+  .feed-modal-img{max-width:100vw;max-height:80vh;}
+}
+@media(max-width:480px){
+  .feed-post-category{font-size:.62rem;padding:.3rem .6rem;}
+  .feed-post-title{font-size:.9rem;}
+}
 
 /* ═══════════ DIFERENCIAIS ═══════════ */
 .diff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.3rem;margin-top:3rem;justify-items:center;max-width:900px;margin-left:auto;margin-right:auto;}
@@ -931,53 +1051,18 @@ textarea{resize:vertical;min-height:95px;}
   </div>
 </section>
 
-<!-- ═══ GALERIA ═══ -->
+<!-- ═══ FEED DE SERVIÇOS ═══ -->
 <section id="galeria" class="sec sec-white rv">
   <div class="gal-top">
     <div>
-      <span class="lbl">Trabalhos Realizados</span>
-      <h2 class="ttl">Resultados que falam<br/>por si mesmos</h2>
+      <span class="lbl">Nossos Trabalhos</span>
+      <h2 class="ttl">Serviços realizados<br>com excelência</h2>
+      <p class="lead" style="margin-top:.5rem;">Conheça alguns dos trabalhos que a Prisma House Painter já executou para clientes como você.</p>
     </div>
-    <a href="#orcamento" class="btn-p" style="align-self:flex-end">Quero o meu &rarr;</a>
   </div>
-  <!--
-    ═══════════════════════════════════════════
-    5 ESPAÇOS DE IMAGEM — GALERIA DE TRABALHOS
-    Para cada espaço, substitua o .gal-ph por:
-      <img src="trabalho-X.jpg" alt="Descrição"/>
-    ═══════════════════════════════════════════
-  -->
-  <div class="gal-grid">
-    <div class="gal-item feat">
-      <div class="gal-img">
-        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/galeria-antes-depois-1-6Xq9gEBwdA9qncBftvCgSw.webp" alt="Antes e Depois - Sala de Estar" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="gal-ovl"><span class="gal-lbl">Pintura Interna · Sala de Estar</span></div>
-    </div>
-    <div class="gal-item">
-      <div class="gal-img">
-        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/galeria-antes-depois-2-f8VcQz4Ha4rKWX4NsZJBPV.webp" alt="Antes e Depois - Quarto" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="gal-ovl"><span class="gal-lbl">Quarto · Textura Especial</span></div>
-    </div>
-    <div class="gal-item">
-      <div class="gal-img">
-        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/01-cimento-queimado-5RY5M7EnNBf8nJRMdCenyk.webp" alt="Efeito Cimento Queimado" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="gal-ovl"><span class="gal-lbl">Efeito Cimento Queimado</span></div>
-    </div>
-    <div class="gal-item">
-      <div class="gal-img">
-        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/02-velvet-nuage-HWK8q6MP4Gj79VtXvZoUzd.webp" alt="Efeito Velvet Nuage" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="gal-ovl"><span class="gal-lbl">Efeito Velvet Nuage</span></div>
-    </div>
-    <div class="gal-item">
-      <div class="gal-img">
-        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/03-pedras-naturais-LTFpPCe9GK8nfVNcLnc4gY.webp" alt="Efeito Pedras Naturais" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="gal-ovl"><span class="gal-lbl">Efeito Pedras Naturais</span></div>
-    </div>
+
+  <div id="feedContainer">
+    <!-- Estados renderizados via JS -->
   </div>
 </section>
 
@@ -1315,6 +1400,319 @@ textarea{resize:vertical;min-height:95px;}
     }, {rootMargin:'50px'});
     document.querySelectorAll('img[loading="lazy"]').forEach(function(img){ imgObserver.observe(img); });
   }
+
+  /* ── Feed de Serviços ── */
+  (function(){
+    var container = document.getElementById('feedContainer');
+    if(!container) return;
+
+    var PAGE_SIZE = 6;
+    var apiUrl = '/api/fotos';
+
+    var estado = {
+      items: [],
+      page: 0,
+      total: 0,
+      loading: false,
+      hasMore: true
+    };
+
+    function formatDate(iso){
+      if(!iso) return '';
+      var d = new Date(iso);
+      if(isNaN(d.getTime())) return iso;
+      var meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+      return d.getDate() + ' de ' + meses[d.getMonth()] + ', ' + d.getFullYear();
+    }
+
+    function getCategory(item){
+      if(item.categoria) return item.categoria;
+      var t = (item.title || '').toLowerCase();
+      if(/pintura interna|interior|sala|quarto|cozinha|banheiro|corredor|passadiço/i.test(t)) return 'Pintura Interna';
+      if(/pintura externa|externa|fachada|outside|facade/i.test(t)) return 'Pintura Externa';
+      if(/textura|efeto|decorativo|veneto|cimento|velvet|nuage/i.test(t)) return 'Efeitos Decorativos';
+      if(/epoxi|epóxi|resina|industrial|comercial|piso/i.test(t)) return 'Epóxi Industrial';
+      if(/varanda|terraço|area externa|área externa|externa/i.test(t)) return 'Área Externa';
+      return 'Pintura Residencial';
+    }
+
+    function getLocation(item){
+      if(item.location) return item.location;
+      if(item.localidade) return item.localidade;
+      if(item.cidade) return item.cidade;
+      if(item.loc) return item.loc;
+      return 'Sumaré - SP';
+    }
+
+    function getDescription(item){
+      if(item.description) return item.description;
+      if(item.desc) return item.desc;
+      var t = (item.title || '').trim();
+      if(t) return 'Resultado de um serviço realizado pela Prisma House Painter com acabamento de alto padrão.';
+      return 'Trabalho realizado pela Prisma House Painter.';
+    }
+
+    function buildPost(item, index){
+      var post = document.createElement('div');
+      post.className = 'feed-post rv';
+      post.style.transitionDelay = (index % 4) * 0.06 + 's';
+
+      var imgSrc = item.url || item.image || item.src || item.foto;
+      var alt = item.alt || item.name || item.title || 'Foto do serviço';
+
+      post.innerHTML =
+        '<div class="feed-post-img">' +
+          '<img src="' + imgSrc + '" alt="' + alt + '" loading="lazy" data-src="' + imgSrc + '">' +
+          '<span class="feed-post-category">' + getCategory(item) + '</span>' +
+        '</div>' +
+        '<div class="feed-post-body">' +
+          '<h3 class="feed-post-title">' + (item.title || item.name || 'Serviço Realizado') + '</h3>' +
+          '<p class="feed-post-desc">' + getDescription(item) + '</p>' +
+          '<div class="feed-post-meta">' +
+            '<span class="feed-post-loc">📍 ' + getLocation(item) + '</span>' +
+            '<span class="feed-post-date">' + formatDate(item.createdAt || item.date || item.created_at) + '</span>' +
+          '</div>' +
+        '</div>';
+
+      var img = post.querySelector('img');
+      post.addEventListener('click', function(){
+        openModal(imgSrc, alt, item.title || '');
+      });
+
+      return post;
+    }
+
+    function renderSkeletons(count){
+      var wrap = document.createElement('div');
+      wrap.className = 'feed-loading';
+      for(var i = 0; i < count; i++){
+        var sk = document.createElement('div');
+        sk.className = 'feed-skel';
+        sk.innerHTML =
+          '<div class="feed-skel-img"></div>' +
+          '<div class="feed-skel-body">' +
+            '<div class="feed-skel-line w"></div>' +
+            '<div class="feed-skel-line n"></div>' +
+            '<div class="feed-skel-line m"></div>' +
+          '</div>';
+        wrap.appendChild(sk);
+      }
+      return wrap;
+    }
+
+    function showLoading(){
+      container.innerHTML = '';
+      var wrap = renderSkeletons(3);
+      container.appendChild(wrap);
+      container.style.minHeight = '320px';
+    }
+
+    function showEmpty(){
+      container.innerHTML =
+        '<div class="feed-empty rv">' +
+          '<span class="feed-empty-em">🏡</span>' +
+          '<h3>Ainda não há trabalhos publicados.</h3>' +
+          '<p>Volte em breve para conferir nossos próximos serviços.</p>' +
+        '</div>';
+      container.style.minHeight = 'auto';
+    }
+
+    function showError(msg){
+      container.innerHTML =
+        '<div class="feed-error rv">' +
+          '<span class="feed-error-icon">⚠️</span>' +
+          '<h3>Não foi possível carregar os trabalhos no momento.</h3>' +
+          '<p>' + msg + '</p>' +
+        '</div>';
+      container.style.minHeight = 'auto';
+    }
+
+    function renderPage(items, append){
+      if(!append) container.innerHTML = '';
+      items.forEach(function(item, i){
+        var post = buildPost(item, i);
+        container.appendChild(post);
+      });
+      var obs;
+      if('IntersectionObserver' in window && !window._feedLazy){
+        window._feedLazy = true;
+        obs = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){
+              var img = e.target;
+              if(img.dataset.src){
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                delete img.dataset.src;
+              }
+              obs.unobserve(img);
+            }
+          });
+        }, {rootMargin:'80px'});
+        container.querySelectorAll('img[loading="lazy"]').forEach(function(img){ obs.observe(img); });
+      } else {
+        container.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+          img.src = img.dataset.src || img.src;
+          img.classList.add('loaded');
+        });
+      }
+      container.style.minHeight = 'auto';
+    }
+
+    function loadNext(){
+      if(estado.loading || !estado.hasMore) return;
+      estado.loading = true;
+      renderSkeletons(2);
+      fetch(apiUrl + '?page=' + (estado.page + 1) + '&limit=' + PAGE_SIZE)
+        .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(data){
+          var list = data.items || data.fotos || data.photos || data.results || data || [];
+          if(Array.isArray(list)){
+            estado.items = estado.items.concat(list);
+            estado.total = data.total || list.length;
+            estado.hasMore = list.length === PAGE_SIZE;
+            estado.page++;
+            var start = (estado.page - 1) * PAGE_SIZE;
+            var chunk = estado.items.slice(start, start + PAGE_SIZE);
+            renderPage(chunk, !!container.children.length);
+          } else {
+            throw new Error('Formato inesperado');
+          }
+        })
+        .catch(function(err){
+          console.warn('[Feed] Erro ao carregar fotos:', err);
+          if(!estado.items.length){
+            showError('Verifique sua conexão e tente novamente.');
+          } else {
+            estado.hasMore = false;
+            var btn = document.getElementById('feedLoadMore');
+            if(btn) btn.style.display = 'none';
+          }
+        })
+        .finally(function(){ estado.loading = false; });
+    }
+
+    function loadMock(){
+      var mock = [
+        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/galeria-antes-depois-1-6Xq9gEBwdA9qncBftvCgSw.webp', title:'Sala de Estar — Pintura Interna', description:'Renovação completa da sala de estar com cores neutras e acabamento impecável. Proteção de mobiliário e limpeza final inclusas.', location:'Sumaré - SP', createdAt:'2026-09-10', categoria:'Pintura Interna' },
+        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/galeria-antes-depois-2-f8VcQz4Ha4rKWX4NsZJBPV.webp', title:'Quarto Master — Textura Especial', description:'Aplicação de textura projetada com finish sofisticado. Resultado que transforma totalmente o ambiente.', location:'Campinas - SP', createdAt:'2026-08-28', categoria:'Efeitos Decorativos' },
+        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/01-cimento-queimado-5RY5M7EnNBf8nJRMdCenyk.webp', title:'Sala de Estar — Cimento Queimado', description:'Acabamento em cimento queimado com traço artesanal. Toque moderno e durável para ambientes residenciais.', location:'Valinhos - SP', createdAt:'2026-08-15', categoria:'Efeitos Decorativos' },
+        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/02-velvet-nuage-HWK8q6MP4Gj79VtXvZoUzd.webp', title:'Divisão — Velvet Nuage', description:'Parede em Velvet Nuage com toque de nuvem. Elegância e suavidade em um único acabamento.', location:'Sumaré - SP', createdAt:'2026-08-02', categoria:'Efeitos Decorativos' },
+        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/03-pedras-naturais-LTFpPCe9GK8nfVNcLnc4gY.webp', title:'Banheiro — Pedras Naturais', description:'Simulação de pedras naturais no banheiro. Visual premium e fácil manutenção para o dia a dia.', location:'Vinhedo - SP', createdAt:'2026-07-20', categoria:'Efeitos Decorativos' },
+        { url:'https://d2xsxph8kpxj0f.cloudfront.net/310419663028940023/56LxJYBerGhgcxpGox8AYa/08-pintura-interna-QEtuvGESTBxW6gLcjfjf3u.webp', title:'Galeria — Pintura Interna Premium', description:'Passadeira fina e uniforme em galeria residencial. Cores selecionadas para realçar a coleção de arte.', location:'Indaiatuba - SP', createdAt:'2026-07-05', categoria:'Pintura Interna' }
+      ];
+      estado.items = mock;
+      estado.total = mock.length;
+      estado.hasMore = false;
+      renderPage(mock, false);
+    }
+
+    function fetchFotos(){
+      if('fetch' in window){
+        fetch(apiUrl + '?page=1&limit=' + PAGE_SIZE)
+          .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function(data){
+            var list = data.items || data.fotos || data.photos || data.results || [];
+            if(Array.isArray(list) && list.length){
+              estado.items = list.slice();
+              estado.total = data.total || list.length;
+              estado.hasMore = list.length === PAGE_SIZE;
+              estado.page = 1;
+              renderPage(list, false);
+            } else {
+              throw new Error('empty');
+            }
+          })
+          .catch(function(){
+            loadMock();
+          });
+      } else {
+        loadMock();
+      }
+    }
+
+    window.feedRefresh = function(){
+      estado.items = [];
+      estado.page = 0;
+      estado.hasMore = true;
+      container.innerHTML = '';
+      fetchFotos();
+    };
+
+    var btn = document.createElement('button');
+    btn.id = 'feedLoadMore';
+    btn.className = 'feed-load-more';
+    btn.textContent = 'Carregar mais serviços';
+    btn.addEventListener('click', loadNext);
+    container.appendChild(btn);
+
+    fetchFotos();
+
+    function openModal(src, alt, title){
+      if(!src) return;
+      var modal = document.createElement('div');
+      modal.className = 'feed-modal';
+      modal.setAttribute('role','dialog');
+      modal.setAttribute('aria-modal','true');
+      modal.setAttribute('aria-label', title || 'Visualização da foto');
+      modal.innerHTML =
+        '<div class="feed-modal-img">' +
+          '<img src="' + src + '" alt="' + (alt || '') + '">' +
+          '<button class="feed-modal-close" aria-label="Fechar visualização">✕</button>' +
+          '<div class="feed-modal-caption">' + (title || alt || '') + '</div>' +
+        '</div>';
+      document.body.appendChild(modal);
+      requestAnimationFrame(function(){ modal.classList.add('open'); });
+
+      var img = modal.querySelector('img');
+      var closed = false;
+
+      function close(){
+        if(closed) return;
+        closed = true;
+        modal.classList.remove('open');
+        setTimeout(function(){ if(modal.parentNode) modal.parentNode.removeChild(modal); }, 320);
+      }
+
+      modal.querySelector('.feed-modal-close').addEventListener('click', close);
+      modal.addEventListener('click', function(e){
+        if(e.target === modal) close();
+      });
+      document.addEventListener('keydown', function onKey(e){
+        if(e.key === 'Escape'){ close(); document.removeEventListener('keydown', onKey); }
+      });
+    }
+
+    var lv = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var img = e.target;
+          if(img.dataset.src){
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+            img.dataset.src = '';
+          }
+          lv.unobserve(img);
+        }
+      });
+    }, {rootMargin:'120px'});
+    var ro = new MutationObserver(function(){
+      container.querySelectorAll('img[loading="lazy"][src]').forEach(function(img){
+        if(img.dataset.src && img.src){
+          lv.observe(img);
+        }
+      });
+    });
+    ro.observe(container, {childList:true, subtree:true});
+
+  })();
+
+  /* ── FAQ Toggle ── */
+  window.toggleFaq = function(btn){
+    var ans = btn.nextElementSibling;
+    var isActive = ans.classList.toggle('active');
+    btn.classList.toggle('active', isActive);
+  };
 
   /* ── Nav link ativo ── */
   var secs = document.querySelectorAll('section[id],footer[id]');
