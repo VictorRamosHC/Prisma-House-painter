@@ -1513,6 +1513,7 @@ textarea{resize:vertical;min-height:95px;}
           '<h3>Ainda não há trabalhos publicados.</h3>' +
           '<p>Volte em breve para conferir nossos próximos serviços.</p>' +
         '</div>';
+      if(container.contains(btn)) container.removeChild(btn);
       container.style.minHeight = 'auto';
     }
 
@@ -1523,6 +1524,7 @@ textarea{resize:vertical;min-height:95px;}
           '<h3>Não foi possível carregar os trabalhos no momento.</h3>' +
           '<p>' + msg + '</p>' +
         '</div>';
+      if(container.contains(btn)) container.removeChild(btn);
       container.style.minHeight = 'auto';
     }
 
@@ -1556,6 +1558,10 @@ textarea{resize:vertical;min-height:95px;}
         });
       }
       container.style.minHeight = 'auto';
+
+      if(estado.hasMore && container.querySelectorAll('.feed-post').length){
+        if(!container.contains(btn)) container.appendChild(btn);
+      }
     }
 
     function loadNext(){
@@ -1626,7 +1632,6 @@ textarea{resize:vertical;min-height:95px;}
     btn.className = 'feed-load-more';
     btn.textContent = 'Carregar mais serviços';
     btn.addEventListener('click', loadNext);
-    container.appendChild(btn);
 
     fetchFotos();
 
