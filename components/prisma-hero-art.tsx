@@ -26,11 +26,12 @@ export function PrismaHeroArt() {
     };
 
     const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
       const bounds = stage.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-      const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-      targetY = Math.max(-12, Math.min(12, x * 18));
-      targetX = Math.max(-12, Math.min(12, y * -18));
+      const x = Math.max(-0.5, Math.min(0.5, (event.clientX - bounds.left) / bounds.width - 0.5));
+      const y = Math.max(-0.5, Math.min(0.5, (event.clientY - bounds.top) / bounds.height - 0.5));
+      targetY = x * 24;
+      targetX = y * -24;
     };
     const leave = () => { targetX = 0; targetY = 0; };
 
