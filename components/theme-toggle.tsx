@@ -1,0 +1,3 @@
+"use client";
+import { useEffect, useState } from "react";
+export function ThemeToggle() { const [dark,setDark]=useState(false); useEffect(()=>{const saved=localStorage.getItem("prisma-theme");const value=saved? saved==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.dataset.theme=value?"dark":"light";setDark(value)},[]); function toggle(){const value=!dark;document.documentElement.dataset.theme=value?"dark":"light";localStorage.setItem("prisma-theme",value?"dark":"light");setDark(value)} return <button className="theme-toggle" type="button" onClick={toggle} aria-label={dark?"Ativar modo claro":"Ativar modo escuro"}>{dark?"☼":"☾"}</button>; }

@@ -1,0 +1,5 @@
+"use client";
+import { useState } from "react";
+import { ThemeToggle } from "./theme-toggle";
+const links=[['Sobre','sobre'],['Serviços','servicos'],['Trabalhos','trabalhos'],['FAQ','faq']];
+export function SiteHeader(){const [open,setOpen]=useState(false);return <header className="site-header"><div className="container nav"><a className="brand" href="#inicio"><span className="brand-mark">P</span><span><strong>PRISMA HOUSE</strong><small>PAINTER</small></span></a><nav className="desktop-links" aria-label="Navegação principal">{links.map(([label,id])=><a key={id} href={`#${id}`}>{label}</a>)}</nav><div className="header-actions"><ThemeToggle/><a className="button primary desktop-cta" href="#orcamento">Solicitar orçamento ↗</a><button className="menu-button" onClick={()=>setOpen(!open)} aria-expanded={open} aria-label={open?"Fechar menu":"Abrir menu"}>☰</button></div><nav className={`mobile-links ${open?'open':''}`} aria-label="Navegação mobile">{links.map(([label,id])=><a key={id} href={`#${id}`} onClick={()=>setOpen(false)}>{label}</a>)}<a className="button primary" href="#orcamento" onClick={()=>setOpen(false)}>Solicitar orçamento</a></nav></div></header>}
